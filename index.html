@@ -45,7 +45,7 @@
   .h-btn:hover { background:rgba(255,255,255,0.2); }
 
   /* ── LAYOUT ────────────────────────────────────────────────────────── */
-  .wrap { max-width:640px; margin:0 auto; padding:20px 16px; }
+  .wrap { max-width:640px; margin:0 auto; padding:20px 16px 48px; }
   .card {
     background:#fff; border-radius:12px; padding:22px;
     margin-bottom:16px; box-shadow:0 1px 4px rgba(0,26,45,0.06);
@@ -267,7 +267,6 @@
   .login-t { font-family:'Montserrat',sans-serif; font-size:26px; font-weight:800; color:#003359; margin-bottom:8px; line-height:1.15; }
   .login-s { font-size:14px; color:#7a8184; line-height:1.4; }
   .login-ft { text-align:center; margin-top:30px; padding:16px; font-size:12px; color:#A5ACAF; line-height:1.6; }
-
   /* ── OVERLAY ───────────────────────────────────────────────────────── */
   .overlay {
     position:fixed; top:0; left:0; right:0; bottom:0;
@@ -341,16 +340,57 @@ var I={
 // ═══════════════════════════════════════════════════════════════════════
 var CFG={year:2026,vDead:"April 13, 2026, 11:59 PM",doDate:"April 17, 2026",doUnlock:new Date("2026-04-17T11:00:00-04:00"),code:"SeDR2026"};
 var CATS=[{id:"ug",n:"Undergraduate Original Research"},{id:"gr",n:"Graduate Original Research"},{id:"lr",n:"Literature Review"},{id:"cr",n:"Case Reports"},{id:"pw",n:"Published Work"}];
-var P={"ug":["Adams, Sarah","Chen, Michael","Davis, Emma","Garcia, Luis","Johnson, Taylor","Kim, Hana","Miller, James","Patel, Priya"],"gr":["Anderson, Claire","Brown, David","Diaz, Maria","Foster, Ryan","Gupta, Ananya","Harris, Nicole","Ibrahim, Omar","Jackson, Megan"],"lr":["Bennett, Olivia","Carter, Ethan","Edwards, Sophia","Franklin, Noah","Gonzalez, Isabella","Hill, Liam","Jones, Ava","Kumar, Raj"],"cr":["Bailey, Mason","Clark, Charlotte","Dixon, Caleb","Evans, Amelia","Fisher, Daniel","Green, Ella","Howard, Jack","Lee, Grace"],"pw":["Brooks, Aiden","Cooper, Lily","Dunn, Owen","Fleming, Zoe","Gibson, Wyatt","Hayes, Mia","Ingram, Leo","King, Chloe"]};
-var J={"ug":["Dr. Williams","Dr. Thompson","Dr. Martinez"],"gr":["Dr. Robinson","Dr. Clark","Dr. Lewis"],"lr":["Dr. Walker","Dr. Hall","Dr. Allen"],"cr":["Dr. Young","Dr. Wright","Dr. Lopez"],"pw":["Dr. Scott","Dr. Adams","Dr. Mitchell"]};
+var P={
+  "ug":["Hung, Theodore","Mejia, Diana","Suram, Joshita","Tang, Sophia","Crosby, Bryce","Dirirsa, Hanan","Paladines, Nathalie","Tang, Jocelyn"],
+  "gr":["Dukes, Zuri","El-Awik, Gabriel","Josey, Morgan","Mallishery, Shivani","Quartararo, Kristen","Ramirez, Gregory","Sabanik, Pouya","Smith, Dustin"],
+  "lr":["Comisi, John","McCoy, Laurin","Smidtas, Lukas","Vyas, Yesha"],
+  "cr":["Corino, Brad","Galliani, Justin","Price, Hannah","Woo, Sung"],
+  "pw":["Killedar, Daniya","Loveless, Reid","Parviainen, Anna","Quintero, Steven"]
+};
+var J={
+  "ug":["Evila Salles","Yukiko Kitase","Mohamed Elashiry"],
+  "gr":["Theresa Gonzales","Sanjiv Kumar","Kathleen Cantey"],
+  "lr":["Madison Richards","Ashley Christman","Kellen Tjioe"],
+  "cr":["Ana Carolina Morandini","Bulem Tutunculer","Ranya ElSayed"],
+  "pw":["Fred Rueggeberg","Erivan Ramos","Mahmoud Elashiry"]
+};
 
 var VID={
-  "ug|Adams, Sarah":"https://augustauniversity.box.com/s/admng13tz6a5frtff3tydd9ve76v8anz",
-  "ug|Chen, Michael":"","ug|Davis, Emma":"","ug|Garcia, Luis":"","ug|Johnson, Taylor":"","ug|Kim, Hana":"","ug|Miller, James":"","ug|Patel, Priya":"",
-  "gr|Anderson, Claire":"","gr|Brown, David":"","gr|Diaz, Maria":"","gr|Foster, Ryan":"","gr|Gupta, Ananya":"","gr|Harris, Nicole":"","gr|Ibrahim, Omar":"","gr|Jackson, Megan":"",
-  "lr|Bennett, Olivia":"","lr|Carter, Ethan":"","lr|Edwards, Sophia":"","lr|Franklin, Noah":"","lr|Gonzalez, Isabella":"","lr|Hill, Liam":"","lr|Jones, Ava":"","lr|Kumar, Raj":"",
-  "cr|Bailey, Mason":"","cr|Clark, Charlotte":"","cr|Dixon, Caleb":"","cr|Evans, Amelia":"","cr|Fisher, Daniel":"","cr|Green, Ella":"","cr|Howard, Jack":"","cr|Lee, Grace":"",
-  "pw|Brooks, Aiden":"","pw|Cooper, Lily":"","pw|Dunn, Owen":"","pw|Fleming, Zoe":"","pw|Gibson, Wyatt":"","pw|Hayes, Mia":"","pw|Ingram, Leo":"","pw|King, Chloe":""
+  "ug|Hung, Theodore":"https://drive.google.com/file/d/1oDpi5YShTjk3uGBZPMr0RFIg_yLyVpim/view",
+  "ug|Mejia, Diana":"https://augustauniversity.box.com/s/lpmcyjor465d61pqltof9yh1rckpwptu",
+  "ug|Patel, Vineet":"https://augustauniversity.box.com/s/no6ubd7dcdj1i15zadhnlga73h7b7guj",
+  "ug|Suram, Joshita":"https://vimeo.com/1178302464?share=copy&fl=sv&fe=ci",
+  "ug|Tang, Sophia":"https://augustauniversity.box.com/s/0aafezwk1vpa9ce3kzqrodbji698hhrm",
+  "ug|Bhat, Keshav":"https://echo360.org/media/9ec1fb7e-34a8-4540-8f9d-203a04b0a4df/public",
+  "ug|Crosby, Bryce":"https://augustauniversity.box.com/s/z577t5pepmnwgsxp86tx6alwez6sdexz",
+  "ug|Dirirsa, Hanan":"https://augustauniversity.box.com/s/mj1aom81k5z2yjqs6dq4ph8zdb3wc9ef",
+  "ug|Paladines, Nathalie":"https://augustauniversity.box.com/s/l6nobegd9fy8nhbl20zcgjllc6bgixap",
+  "ug|Shiver, Lauren":"https://augustauniversity.app.box.com/s/xoxe9fey79poxl0j5vcdjgquy4ibw65r",
+  "ug|Tang, Jocelyn":"https://augustauniversity.box.com/s/r2xfbgjszml04xvyfdw3c8g9rjtc4m8h",
+  "ug|Thakkar, Tanya":"https://augustauniversity.box.com/s/xcb1nghnfuri3w6t53x3wvau4x2igubw",
+  "gr|Andijani, Anas":"",
+  "gr|Bhandari, Bidhan":"https://augustauniversity.box.com/s/cjyz6de7a6jnt1sq7qowggnbo66tskva",
+  "gr|Dukes, Zuri":"https://augustauniversity.box.com/s/1lbs7khtzoen93erhum527w4cx4s2t83",
+  "gr|El-Awik, Gabriel":"https://augustauniversity.box.com/s/mgnxa15ebyl3pmyruqsrtzy2lfgoqt3d",
+  "gr|Guevara, Mauricio":"",
+  "gr|Josey, Morgan":"https://augustauniversity.box.com/s/d8g8t4ci54mr39u02nc5tj7u9o1d43r8",
+  "gr|Mallishery, Shivani":"https://1drv.ms/v/c/d37bb63c51192366/IQB6BIzbTtuKSZ8egs_QUo9VAU40fgDgnimp50a5tm7kqKQ?e=hxnTgS",
+  "gr|Quartararo, Kristen":"https://augustauniversity.box.com/s/j4wt8ecpx2kuikv1bik0ad3rpx4sgci3",
+  "gr|Ramirez, Gregory":"https://augustauniversity.box.com/s/hn8dxpr35fhbevoqkwlij6wokgq89269",
+  "gr|Sabanik, Pouya":"https://augustauniversity.box.com/s/5gxerjeshzasxhz3c36jx3d0xjelgx7a",
+  "gr|Smith, Dustin":"https://augustauniversity.box.com/s/h7a6dxlm0knu2a7uhsaljahhjq0ci4ud",
+  "lr|Comisi, John":"https://augustauniversity.box.com/s/dbgir99fqblcpxtawhxrvy9qlufp5azi",
+  "lr|McCoy, Laurin":"https://augustauniversity.box.com/s/hz5wysyldr68qibwg2ssvsz177qe3jz1",
+  "lr|Smidtas, Lukas":"https://augustauniversity.box.com/s/le8zbjxxvguq0nu2x6fg6c0jsikn3fby",
+  "lr|Vyas, Yesha":"https://augedu-my.sharepoint.com/:p:/g/personal/yvyas_augusta_edu/IQAwzAfq1qBEQ7lsoszesA61AQgXab8s7O5pCYRSv_vhEOE?e=AMbHbI",
+  "cr|Corino, Brad":"https://augustauniversity.box.com/s/admng13tz6a5frtff3tydd9ve76v8anz",
+  "cr|Galliani, Justin":"https://youtu.be/PBRJdzVldJU",
+  "cr|Price, Hannah":"https://augustauniversity.box.com/s/zad9p3a54etv3h0a6szftpp547ms5x2p",
+  "cr|Woo, Sung":"https://augustauniversity.box.com/s/jeho0kl7mabzt5u2962dbft06wy42wqo",
+  "pw|Killedar, Daniya":"https://augustauniversity.box.com/s/hsyj8nqs9ok09z45nafcwny70rzl9rdt",
+  "pw|Loveless, Reid":"https://augustauniversity.box.com/s/rlprciwdljwkm8kdarwq52bs5ywyy7yj",
+  "pw|Parviainen, Anna":"https://augustauniversity.box.com/s/rlohhw6z0p08t0w9zkmhevdvzpnopv1q",
+  "pw|Quintero, Steven":"https://drive.google.com/file/d/1QvJmbs0v98tC00_h1KCvXu9iMXlBIQnD/view"
 };
 function vidUrl(c,n){return VID[c+"|"+n]||""}
 
@@ -408,9 +448,11 @@ function cn(id){for(var i=0;i<CATS.length;i++)if(CATS[i].id===id)return CATS[i].
 function R(){$("signOutBtn").style.display=S.v!=="login"?"block":"none";switch(S.v){case"login":rL();break;case"al":rAL();break;case"admin":rA();break;case"dash":rD();break;case"score":rS();break}}
 
 function rL(){
-  var js=[];CATS.forEach(function(ct){(J[ct.id]||[]).forEach(function(jg){js.push({j:jg,ci:ct.id,cn:ct.n})})});
+  var js=[];CATS.forEach(function(ct){(J[ct.id]||[]).forEach(function(jg,idx){js.push({j:jg,ci:ct.id,cn:ct.n,head:idx===0})})});
   ap().innerHTML='<div class="login-hd"><div class="login-ey">SeDR '+CFG.year+'</div><div class="login-t">Competition<br>Scoring Tool</div><div class="login-s">The Dental College of Georgia<br>at Augusta University</div></div>'+
-    '<div class="card"><label class="label">Select your name to begin</label><select class="sel" id="js"><option value="">Select judge...</option>'+js.map(function(x){return'<option value="'+x.j+"|"+x.ci+'">'+e(x.j)+" | "+e(x.cn)+"</option>"}).join("")+'</select><button class="btn-primary" id="lb" disabled onclick="dL()">Start Judging</button></div>'+
+    '<div class="card"><label class="label">Select your name to begin</label><select class="sel" id="js"><option value="">Select judge...</option>'+js.map(function(x){return'<option value="'+x.j+"|"+x.ci+'">'+e(x.j)+(x.head?" *":"")+' | '+e(x.cn)+"</option>"}).join("")+'</select>'+
+    '<div style="font-size:11px;color:#A5ACAF;margin-top:8px;padding:0 2px">* Head Judge</div>'+
+    '<button class="btn-primary" id="lb" disabled onclick="dL()">Start Judging</button></div>'+
     '<div style="text-align:center;margin-top:24px"><button class="btn-link" onclick="sAL()">Admin access</button></div>'+
     '<div class="login-ft">Video rubrics due: '+CFG.vDead+'<br>Day-of poster visits: '+CFG.doDate+'</div>'+
     '<div style="text-align:center;padding:8px 16px 24px;font-size:9px;color:#c8cccf;letter-spacing:0.02em">Office of Digital Technologies</div>';
