@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#003359">
+<title>SeDR 2026 | Competition Scoring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ── RESET ─────────────────────────────────────────────────────────── */
+  *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+  html { -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent; }
+  body {
+    font-family:'Source Sans 3','Source Sans Pro',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:#eef0f1; color:#1a2a36; min-height:100vh;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  }
+
+  /* ── AU PALETTE ────────────────────────────────────────────────────── */
+  /* Navy:#003359  Gray:#A5ACAF  Green:#44D62C                          */
+  /* Navy-90:#001a2d -70:#1a5280 -40:#4d8ab8 -15:#dce6ee -08:#eef2f6    */
+  /* Gray-70:#7a8184 -40:#c8cccf -20:#e4e6e7 -08:#f4f5f5               */
+  /* Green-80:#36ab23 -15:#ddf7d8  Muted:#5c6a72                        */
+
+  /* ── HEADER ────────────────────────────────────────────────────────── */
+  header {
+    background:#003359; color:#fff; padding:16px 20px;
+    display:flex; align-items:center; justify-content:space-between;
+    position:sticky; top:0; z-index:100;
+    box-shadow:0 2px 12px rgba(0,26,45,0.25);
+  }
+  .h-title { font-family:'Montserrat',sans-serif; font-size:17px; font-weight:700; letter-spacing:0.02em; }
+  .h-sub { font-size:12px; opacity:0.55; font-weight:400; margin-left:4px; }
+  .h-btn {
+    background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2);
+    color:#fff; padding:7px 16px; border-radius:6px; font-size:13px;
+    cursor:pointer; font-family:'Source Sans 3',sans-serif; display:none;
+    transition:background .2s;
+  }
+  .h-btn:hover { background:rgba(255,255,255,0.2); }
+
+  /* ── LAYOUT ────────────────────────────────────────────────────────── */
+  .wrap { max-width:640px; margin:0 auto; padding:20px 16px 48px; }
+  .card {
+    background:#fff; border-radius:12px; padding:22px;
+    margin-bottom:16px; box-shadow:0 1px 4px rgba(0,26,45,0.06);
+    border:1px solid #e4e6e7;
+  }
+  .title { font-family:'Montserrat',sans-serif; font-size:20px; font-weight:700; color:#003359; margin-bottom:16px; }
+
+  /* ── FORM INPUTS ───────────────────────────────────────────────────── */
+  .label { font-size:14px; font-weight:600; color:#003359; margin-bottom:8px; display:block; }
+  .hint { font-size:12px; color:#7a8184; line-height:1.5; margin-bottom:10px; }
+  .sel {
+    width:100%; padding:13px 40px 13px 14px; font-size:15px;
+    border:2px solid #c8cccf; border-radius:8px;
+    font-family:'Source Sans 3',sans-serif;
+    -webkit-appearance:none; appearance:none;
+    background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23003359' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat right 14px center;
+    cursor:pointer; outline:none; color:#1a2a36; transition:border-color .2s;
+  }
+  .sel:focus { border-color:#003359; }
+  .txa {
+    width:100%; padding:12px 14px; font-size:14px;
+    border:2px solid #c8cccf; border-radius:8px;
+    font-family:'Source Sans 3',sans-serif;
+    min-height:90px; resize:vertical; outline:none;
+    line-height:1.5; color:#1a2a36; transition:border-color .2s;
+  }
+  .txa:focus { border-color:#003359; }
+  .pwd { width:100%; padding:13px; font-size:18px; border:2px solid #c8cccf; border-radius:8px; font-family:'Source Sans 3',sans-serif; text-align:center; letter-spacing:4px; outline:none; color:#1a2a36; }
+  .pwd:focus { border-color:#003359; }
+
+  /* ── BUTTONS ───────────────────────────────────────────────────────── */
+  .btn-primary {
+    background:#003359; color:#fff; border:none; padding:15px 28px;
+    border-radius:8px; font-size:15px; font-weight:600; cursor:pointer;
+    font-family:'Source Sans 3',sans-serif; width:100%; margin-top:16px;
+    transition:background .2s;
+  }
+  .btn-primary:hover { background:#1a5280; }
+  .btn-primary:active { background:#001a2d; }
+  .btn-primary:disabled { opacity:0.35; pointer-events:none; }
+  .btn-outline {
+    background:#fff; color:#003359; border:2px solid #003359;
+    padding:13px 24px; border-radius:8px; font-size:14px; font-weight:600;
+    cursor:pointer; font-family:'Source Sans 3',sans-serif; width:100%;
+    transition:all .2s;
+  }
+  .btn-outline:hover { background:#eef2f6; }
+  .btn-back {
+    background:none; border:none; color:#003359; font-size:14px;
+    cursor:pointer; font-weight:600; font-family:'Source Sans 3',sans-serif;
+    padding:0; margin-bottom:20px; display:inline-flex; align-items:center; gap:6px;
+  }
+  .btn-reset {
+    background:#fff; color:#5c6a72; border:2px solid #c8cccf;
+    padding:12px; border-radius:8px; font-size:13px; font-weight:600;
+    cursor:pointer; font-family:'Source Sans 3',sans-serif; width:100%; margin-top:16px;
+  }
+  .btn-link { background:none; border:none; color:#A5ACAF; font-size:13px; cursor:pointer; font-family:'Source Sans 3',sans-serif; text-decoration:underline; }
+  .btn-watch {
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    width:100%; margin-top:14px; padding:13px; background:#eef2f6;
+    border:2px solid #003359; border-radius:8px; cursor:pointer;
+    color:#003359; font-family:'Source Sans 3',sans-serif; font-size:14px; font-weight:700;
+    transition:background .2s;
+  }
+  .btn-watch:hover { background:#dce6ee; }
+  .btn-watch-sm {
+    background:none; border:1px solid #003359; border-radius:6px;
+    padding:5px 10px; cursor:pointer; color:#003359;
+    display:inline-flex; align-items:center; gap:4px;
+    font-size:11px; font-weight:600; white-space:nowrap;
+    font-family:'Source Sans 3',sans-serif; transition:background .15s;
+  }
+  .btn-watch-sm:hover { background:#eef2f6; }
+
+  /* ── BADGES ────────────────────────────────────────────────────────── */
+  .badge {
+    padding:4px 10px; border-radius:20px; font-size:11px; font-weight:700;
+    letter-spacing:0.03em; text-transform:uppercase;
+    display:inline-flex; align-items:center; gap:4px;
+  }
+  .badge-done { background:#ddf7d8; color:#36ab23; }
+  .badge-wait { background:#eef2f6; color:#7a8184; }
+  .badge-v { background:#dce6ee; color:#003359; }
+  .badge-d { background:#ddf7d8; color:#36ab23; }
+
+  /* ── PROGRESS BARS ─────────────────────────────────────────────────── */
+  .prog { height:6px; border-radius:3px; background:#e4e6e7; overflow:hidden; margin-top:8px; }
+  .prog-fill { height:100%; border-radius:3px; transition:width .3s; background:#003359; }
+  .prog-fill.full { background:#44D62C; }
+
+  /* ── TABS ───────────────────────────────────────────────────────────── */
+  .tabs { display:flex; border-bottom:2px solid #e4e6e7; margin-bottom:16px; gap:4px; }
+  .tab {
+    padding:11px 20px; font-size:14px; font-weight:500; color:#A5ACAF;
+    border:none; border-bottom:3px solid transparent; cursor:pointer;
+    font-family:'Source Sans 3',sans-serif; background:none;
+    transition:all .2s; display:inline-flex; align-items:center; gap:6px;
+  }
+  .tab.on { color:#003359; font-weight:700; border-bottom-color:#003359; }
+  .tab.off { opacity:0.5; }
+
+  /* ── PRESENTER LIST ────────────────────────────────────────────────── */
+  .p-row {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 16px; border-radius:10px; margin-bottom:8px;
+    border:1px solid #e4e6e7; cursor:pointer; transition:all .15s;
+    background:#fff; border-left:4px solid #e4e6e7;
+  }
+  .p-row:hover { background:#f5f7f9; }
+  .p-row:active { background:#eef2f6; }
+  .p-num {
+    font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700;
+    color:#A5ACAF; width:22px; text-align:center; flex-shrink:0; margin-right:12px;
+  }
+  .p-name { font-size:15px; font-weight:600; color:#1a2a36; }
+  .p-avg { font-size:12px; color:#7a8184; margin-top:2px; }
+  .p-right { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+
+  /* ── SCORING FORM ──────────────────────────────────────────────────── */
+  .crit-card {
+    background:#f5f7f9; border-radius:12px; padding:20px;
+    margin-bottom:16px; border:1px solid #e4e6e7;
+  }
+  .crit-step {
+    font-size:11px; font-weight:700; color:#A5ACAF;
+    text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px;
+  }
+  .crit-name {
+    font-family:'Montserrat',sans-serif; font-size:15px; font-weight:700;
+    color:#003359; margin-bottom:8px;
+  }
+  .crit-q {
+    font-size:14px; color:#1a2a36; margin-bottom:16px; line-height:1.55;
+  }
+  .crit-q-label {
+    font-size:11px; font-weight:600; color:#7a8184;
+    text-transform:uppercase; letter-spacing:0.06em;
+    margin-bottom:4px;
+  }
+  .band-instr {
+    font-size:11px; color:#A5ACAF; text-align:center; margin-top:6px;
+  }
+
+  /* ── BAND PICKER ───────────────────────────────────────────────────── */
+  .bands { display:flex; gap:6px; }
+  .band {
+    flex:1; padding:12px 4px; border-radius:8px; border:2px solid #c8cccf;
+    background:#fff; font-size:11px; font-weight:600; cursor:pointer;
+    font-family:'Source Sans 3',sans-serif; transition:all .15s;
+    text-align:center; line-height:1.3; color:#5c6a72;
+  }
+  .band:active { transform:scale(0.96); }
+  .band-range { font-size:10px; opacity:0.65; font-weight:400; display:block; margin-top:3px; }
+  .sub-area {
+    margin-top:10px; padding:14px; background:#fff; border-radius:8px; border:1px solid #e4e6e7;
+  }
+  .sub-head {
+    font-size:11px; font-weight:600; margin-bottom:10px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .sub-grid { display:flex; gap:6px; }
+  .sub-btn {
+    flex:1; padding:12px 0; border-radius:6px; border:1px solid #c8cccf;
+    background:#f5f7f9; color:#1a2a36; font-size:14px; font-weight:600;
+    cursor:pointer; font-family:'Source Sans 3',sans-serif;
+    transition:all .12s; text-align:center;
+  }
+  .sub-btn:active { transform:scale(0.95); }
+
+  /* ── FEEDBACK BOX ──────────────────────────────────────────────────── */
+  .fb-box {
+    margin-top:12px; padding:10px 14px; background:#fff; border-radius:8px;
+    font-size:12px; color:#5c6a72; line-height:1.5; border-left:3px solid #A5ACAF;
+  }
+
+  /* ── SCORE SUMMARY ─────────────────────────────────────────────────── */
+  .summary {
+    background:#003359; color:#fff; text-align:center; padding:18px; border-radius:12px; margin-bottom:16px;
+  }
+  .summary-label { font-size:13px; opacity:0.55; margin-bottom:4px; }
+  .summary-num { font-family:'Montserrat',sans-serif; font-size:34px; font-weight:800; }
+  .summary-desc { font-size:13px; opacity:0.55; margin-top:2px; }
+
+  /* ── ERROR ──────────────────────────────────────────────────────────── */
+  .err { background:#eef2f6; color:#003359; padding:12px 16px; border-radius:8px; font-size:14px; margin-bottom:12px; border:1px solid #c8cccf; }
+
+  /* ── INSTRUCTION BOX ───────────────────────────────────────────────── */
+  .instr {
+    background:#eef2f6; border-radius:8px; padding:14px 16px;
+    font-size:13px; color:#5c6a72; line-height:1.55; margin-bottom:16px;
+    border-left:3px solid #003359;
+  }
+  .instr strong { color:#003359; }
+
+  /* ── ADMIN ─────────────────────────────────────────────────────────── */
+  .rank-row {
+    display:flex; align-items:center; padding:12px 16px; border-radius:8px;
+    margin-bottom:6px; border:1px solid #e4e6e7; background:#fff; color:#1a2a36;
+  }
+  .rk1 { background:#003359; color:#fff; border:none; }
+  .rk2 { background:#1a5280; color:#fff; border:none; }
+  .rk3 { background:#4d8ab8; color:#fff; border:none; }
+  .rk-n { font-family:'Montserrat',sans-serif; font-size:18px; font-weight:800; width:32px; text-align:center; flex-shrink:0; }
+  .rk-info { flex:1; margin-left:12px; }
+  .rk-name { font-size:14px; font-weight:600; }
+  .rk-det { font-size:11px; opacity:0.65; margin-top:2px; }
+  .rk-sc { font-family:'Montserrat',sans-serif; font-size:18px; font-weight:800; text-align:right; flex-shrink:0; }
+  .stats { display:flex; gap:10px; margin-bottom:20px; }
+  .stat { flex:1; text-align:center; padding:14px 8px; }
+  .stat-n { font-family:'Montserrat',sans-serif; font-size:22px; font-weight:800; color:#003359; }
+  .stat-n.ok { color:#44D62C; }
+  .j-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #f4f5f5; }
+  .j-row:last-child { border-bottom:none; }
+
+  /* ── LOGIN ──────────────────────────────────────────────────────────── */
+  .login-hd { text-align:center; padding:44px 0 32px; }
+  .login-ey { font-family:'Montserrat',sans-serif; font-size:11px; font-weight:700; color:#A5ACAF; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:10px; }
+  .login-t { font-family:'Montserrat',sans-serif; font-size:26px; font-weight:800; color:#003359; margin-bottom:8px; line-height:1.15; }
+  .login-s { font-size:14px; color:#7a8184; line-height:1.4; }
+  .login-ft { text-align:center; margin-top:30px; padding:16px; font-size:12px; color:#A5ACAF; line-height:1.6; }
+  /* ── OVERLAY ───────────────────────────────────────────────────────── */
+  .overlay {
+    position:fixed; top:0; left:0; right:0; bottom:0;
+    background:rgba(0,51,89,0.96); display:flex; align-items:center;
+    justify-content:center; z-index:200; flex-direction:column;
+    color:#fff; text-align:center; padding:40px;
+    animation:fadeIn .3s;
+  }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+  .hidden { display:none !important; }
+  .icon { display:inline-block; vertical-align:middle; flex-shrink:0; }
+
+  /* ── RESPONSIVE ────────────────────────────────────────────────────── */
+  @media (max-width:380px) {
+    .band { font-size:10px; padding:9px 2px; }
+    .sub-btn { font-size:13px; padding:10px 0; }
+    .h-title { font-size:15px; }
+    .wrap { padding:16px 12px; }
+    .card { padding:18px; }
+  }
+  @media (min-width:410px) and (max-width:767px) {
+    .band { font-size:11px; padding:11px 4px; }
+    .sub-btn { padding:12px 0; }
+  }
+  @media (min-width:768px) {
+    .wrap { padding:28px 24px; }
+    .band { padding:14px 6px; font-size:12px; }
+    .card { padding:26px; }
+  }
+  /* Prevent iOS zoom on form focus */
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+    .sel, .txa, .pwd { font-size:16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div><span class="h-title">SeDR 2026<span class="h-sub">Competition Scoring</span></span></div>
+  <button class="h-btn" id="signOutBtn" onclick="showLogin()">Sign Out</button>
+</header>
+
+<div class="wrap" id="app"></div>
+
+<div class="overlay hidden" id="successOverlay">
+  <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="36" cy="36" r="33" stroke="#44D62C" stroke-width="3" fill="none"/>
+    <path d="M22 37l10 10 18-20" stroke="#44D62C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </svg>
+  <div style="font-family:'Montserrat',sans-serif;font-size:24px;font-weight:700;margin-top:22px;margin-bottom:6px">Scores Submitted</div>
+  <div style="font-size:15px;opacity:0.55" id="successName"></div>
+  <button class="btn-primary" style="max-width:300px;margin-top:28px;background:#44D62C;color:#003359" onclick="dismissSuccess()">Continue</button>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════
+// SVG ICONS
+// ═══════════════════════════════════════════════════════════════════════
+var I={
+  back:'<svg class="icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="#003359" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  lock:'<svg class="icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M5 7V5a3 3 0 016 0v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg>',
+  lockLg:'<svg width="44" height="44" viewBox="0 0 44 44" fill="none"><rect x="9" y="20" width="26" height="17" rx="3" stroke="#A5ACAF" stroke-width="2.5" fill="none"/><path d="M14 20v-6a8 8 0 0116 0v6" stroke="#A5ACAF" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="22" cy="29.5" r="2.5" fill="#A5ACAF"/></svg>',
+  chk:'<svg class="icon" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6.5l3 3 5-6" stroke="#36ab23" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  play:'<svg class="icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M6.5 5v6l4.5-3z" fill="currentColor"/></svg>',
+  vid:'<svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1.5" y="3.5" width="11" height="11" rx="2" stroke="#003359" stroke-width="1.5" fill="none"/><path d="M12.5 7l4-2.5v9L12.5 11" stroke="#003359" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>'
+};
+
+// ═══════════════════════════════════════════════════════════════════════
+// CONFIGURATION
+// ═══════════════════════════════════════════════════════════════════════
+var CFG={year:2026,vDead:"April 13, 2026, 11:59 PM",doDate:"April 17, 2026",doUnlock:new Date("2026-04-17T11:00:00-04:00"),code:"SeDR2026"};
+var CATS=[{id:"ug",n:"Undergraduate Original Research"},{id:"gr",n:"Graduate Original Research"},{id:"lr",n:"Literature Review"},{id:"cr",n:"Case Reports"},{id:"pw",n:"Published Work"}];
+var P={
+  "ug":["Hung, Theodore","Mejia, Diana","Suram, Joshita","Tang, Sophia","Crosby, Bryce","Dirirsa, Hanan","Paladines, Nathalie","Tang, Jocelyn"],
+  "gr":["Dukes, Zuri","El-Awik, Gabriel","Josey, Morgan","Mallishery, Shivani","Quartararo, Kristen","Ramirez, Gregory","Sabanik, Pouya","Smith, Dustin"],
+  "lr":["Comisi, John","McCoy, Laurin","Smidtas, Lukas","Vyas, Yesha"],
+  "cr":["Corino, Brad","Galliani, Justin","Price, Hannah","Woo, Sung"],
+  "pw":["Killedar, Daniya","Loveless, Reid","Parviainen, Anna","Quintero, Steven"]
+};
+var J={
+  "ug":["Evila Salles","Yukiko Kitase","Mohamed Elashiry"],
+  "gr":["Theresa Gonzales","Sanjiv Kumar","Kathleen Cantey"],
+  "lr":["Madison Richards","Ashley Christman","Kellen Tjioe"],
+  "cr":["Ana Carolina Morandini","Bulem Tutunculer","Ranya ElSayed"],
+  "pw":["Fred Rueggeberg","Erivan Ramos","Mahmoud Elashiry"]
+};
+
+var VID={
+  "ug|Hung, Theodore":"https://drive.google.com/file/d/1oDpi5YShTjk3uGBZPMr0RFIg_yLyVpim/view",
+  "ug|Mejia, Diana":"https://augustauniversity.box.com/s/lpmcyjor465d61pqltof9yh1rckpwptu",
+  "ug|Patel, Vineet":"https://augustauniversity.box.com/s/no6ubd7dcdj1i15zadhnlga73h7b7guj",
+  "ug|Suram, Joshita":"https://vimeo.com/1178302464?share=copy&fl=sv&fe=ci",
+  "ug|Tang, Sophia":"https://augustauniversity.box.com/s/0aafezwk1vpa9ce3kzqrodbji698hhrm",
+  "ug|Bhat, Keshav":"https://echo360.org/media/9ec1fb7e-34a8-4540-8f9d-203a04b0a4df/public",
+  "ug|Crosby, Bryce":"https://augustauniversity.box.com/s/z577t5pepmnwgsxp86tx6alwez6sdexz",
+  "ug|Dirirsa, Hanan":"https://augustauniversity.box.com/s/mj1aom81k5z2yjqs6dq4ph8zdb3wc9ef",
+  "ug|Paladines, Nathalie":"https://augustauniversity.box.com/s/l6nobegd9fy8nhbl20zcgjllc6bgixap",
+  "ug|Shiver, Lauren":"https://augustauniversity.app.box.com/s/xoxe9fey79poxl0j5vcdjgquy4ibw65r",
+  "ug|Tang, Jocelyn":"https://augustauniversity.box.com/s/r2xfbgjszml04xvyfdw3c8g9rjtc4m8h",
+  "ug|Thakkar, Tanya":"https://augustauniversity.box.com/s/xcb1nghnfuri3w6t53x3wvau4x2igubw",
+  "gr|Andijani, Anas":"",
+  "gr|Bhandari, Bidhan":"https://augustauniversity.box.com/s/cjyz6de7a6jnt1sq7qowggnbo66tskva",
+  "gr|Dukes, Zuri":"https://augustauniversity.box.com/s/1lbs7khtzoen93erhum527w4cx4s2t83",
+  "gr|El-Awik, Gabriel":"https://augustauniversity.box.com/s/mgnxa15ebyl3pmyruqsrtzy2lfgoqt3d",
+  "gr|Guevara, Mauricio":"",
+  "gr|Josey, Morgan":"https://augustauniversity.box.com/s/d8g8t4ci54mr39u02nc5tj7u9o1d43r8",
+  "gr|Mallishery, Shivani":"https://1drv.ms/v/c/d37bb63c51192366/IQB6BIzbTtuKSZ8egs_QUo9VAU40fgDgnimp50a5tm7kqKQ?e=hxnTgS",
+  "gr|Quartararo, Kristen":"https://augustauniversity.box.com/s/2u6lrhhfejdwp9rk2p8gz1c09qnf7rmp",
+  "gr|Ramirez, Gregory":"https://augustauniversity.box.com/s/25ozlfq3giacp2dcq7eo0kaug8m6xiiv",
+  "gr|Sabanik, Pouya":"https://augustauniversity.box.com/s/5gxerjeshzasxhz3c36jx3d0xjelgx7a",
+  "gr|Smith, Dustin":"https://augustauniversity.box.com/s/h7a6dxlm0knu2a7uhsaljahhjq0ci4ud",
+  "lr|Comisi, John":"https://augustauniversity.box.com/s/dbgir99fqblcpxtawhxrvy9qlufp5azi",
+  "lr|McCoy, Laurin":"https://augustauniversity.box.com/s/hz5wysyldr68qibwg2ssvsz177qe3jz1",
+  "lr|Smidtas, Lukas":"https://augustauniversity.box.com/s/le8zbjxxvguq0nu2x6fg6c0jsikn3fby",
+  "lr|Vyas, Yesha":"https://augedu-my.sharepoint.com/:p:/g/personal/yvyas_augusta_edu/IQAwzAfq1qBEQ7lsoszesA61AQgXab8s7O5pCYRSv_vhEOE?e=AMbHbI",
+  "cr|Corino, Brad":"https://augustauniversity.box.com/s/admng13tz6a5frtff3tydd9ve76v8anz",
+  "cr|Galliani, Justin":"https://youtu.be/PBRJdzVldJU",
+  "cr|Price, Hannah":"https://augustauniversity.box.com/s/zad9p3a54etv3h0a6szftpp547ms5x2p",
+  "cr|Woo, Sung":"https://augustauniversity.box.com/s/jeho0kl7mabzt5u2962dbft06wy42wqo",
+  "pw|Killedar, Daniya":"https://augustauniversity.box.com/s/hsyj8nqs9ok09z45nafcwny70rzl9rdt",
+  "pw|Loveless, Reid":"https://augustauniversity.box.com/s/rlprciwdljwkm8kdarwq52bs5ywyy7yj",
+  "pw|Parviainen, Anna":"https://augustauniversity.box.com/s/rlohhw6z0p08t0w9zkmhevdvzpnopv1q",
+  "pw|Quintero, Steven":"https://drive.google.com/file/d/1QvJmbs0v98tC00_h1KCvXu9iMXlBIQnD/view"
+};
+function vidUrl(c,n){return VID[c+"|"+n]||""}
+
+// ═══════════════════════════════════════════════════════════════════════
+// RUBRICS
+// ═══════════════════════════════════════════════════════════════════════
+var VC=[
+  {id:"sig",n:"Significance and Purpose",p:"Is it clear why this work was done? Does the presenter make a convincing case for the importance of the topic?",a:{l:"Unclear why the work was done. Topic appears to lack relevance.",m:"Purpose is stated but not clearly articulated. Some relevance.",g:"Purpose is clearly stated with a reasonable case for importance.",h:"Purpose is compelling and well justified. Clearly conveys why this work matters."}},
+  {id:"app",n:"Approach and Organization",p:"Is the approach clearly described? Can you follow what was done and why? Does the presentation move logically?",a:{l:"Approach is unclear or missing key information. Difficult to follow.",m:"Approach described but lacks clarity in places. Flow could improve.",g:"Approach is clearly described with a logical sequence throughout.",h:"Described with excellent clarity and detail. Exceptionally well organized."}},
+  {id:"fin",n:"Findings and Conclusions",p:"Are the findings clearly presented? Do the conclusions follow from the results? Are limitations acknowledged?",a:{l:"Findings unclear or incomplete. Conclusions absent or unsupported.",m:"Findings presented but could be clearer. Some conclusions overstated.",g:"Findings clearly presented. Conclusions supported. Limitations acknowledged.",h:"Exceptional clarity. Conclusions well grounded. Limitations thoughtfully discussed."}},
+  {id:"qua",n:"Presentation Quality",p:"Is the presentation well constructed? Are slides clean and professional? Is pacing appropriate? Were guidelines followed?",a:{l:"Disorganized. Slides cluttered. Time limit issues. Guidelines not followed.",m:"Recognizable structure but uneven. Slides functional but lack polish.",g:"Well organized, clean slides, appropriate pacing. Guidelines followed.",h:"Polished, engaging, professional throughout. All guidelines followed precisely."}}
+];
+var DC=[
+  {id:"pos",n:"Poster as Visual Communication",p:"Is the poster well organized and easy to read? Can you follow the story without the presenter? Are visuals effective?",a:{l:"Poorly organized, difficult to read, visually cluttered.",m:"Readable but layout could improve. Some sections hard to follow.",g:"Well organized with clear sections and logical flow. Effective visuals.",h:"Visually excellent, professional design. Communicates effectively on its own."}},
+  {id:"und",n:"Understanding of the Work",p:"Does the presenter demonstrate genuine understanding? Can they explain beyond what is written? Do they grasp the broader context?",a:{l:"Reading or reciting memorized content. Cannot explain key aspects.",m:"Can explain main points but struggles with details or context.",g:"Solid understanding. Explains decisions and findings with confidence.",h:"Thorough understanding. Provides thoughtful connections beyond the poster."}},
+  {id:"que",n:"Response to Questions",p:"Does the presenter respond directly and thoughtfully? Handle challenging questions with composure? Acknowledge what they do not know?",a:{l:"Unable to address questions meaningfully. Vague or disengaged.",m:"Addresses some questions but struggles with others. Sometimes indirect.",g:"Responds directly and thoughtfully. Acknowledges limitations appropriately.",h:"Well-reasoned, insightful responses. Engages in productive dialogue."}}
+];
+
+var BND=[
+  {lb:"Unacceptable",cl:"#5c6a72",sc:[1.25,1.50,1.75,2.00]},
+  {lb:"Acceptable",cl:"#A5ACAF",sc:[2.25,2.50,2.75,3.00]},
+  {lb:"Very Good",cl:"#003359",sc:[3.25,3.50,3.75,4.00]},
+  {lb:"Outstanding",cl:"#44D62C",sc:[4.25,4.50,4.75,5.00]}
+];
+
+// ═══════════════════════════════════════════════════════════════════════
+// STATE + STORAGE
+// ═══════════════════════════════════════════════════════════════════════
+var S={v:"login",j:"",c:"",tab:"video",st:null,sp:null,fs:[],fb:[],ff:"",fe:"",ac:null};
+var SK="sedr2026_scores";
+function ld(){try{return JSON.parse(localStorage.getItem(SK)||"{}")}catch(e){return{}}}
+
+var SHEETS_URL = "https://script.google.com/macros/s/AKfycbyt2Uw2CmKos2JMvcSwE1slUu7lFaUpCMMqyRw6iVi_39Vuk8KPTvDTKPC88Rxt_ivMIw/exec";
+function ps(t,j,p,c,d){if(!SHEETS_URL)return;try{fetch(SHEETS_URL,{method:"POST",body:JSON.stringify({type:t,judge:j,presenter:p,category:c,c1:d.scores[0]||"",c2:d.scores[1]||"",c3:d.scores[2]||"",c4:d.scores[3]||"",feedback:d.feedback||"",timestamp:new Date().toISOString()}),mode:"no-cors"})}catch(e){}}
+function sv(t,j,p,c,d){var s=ld();s[t+"|"+j+"|"+p+"|"+c]={scores:d.scores,feedback:d.feedback,ts:new Date().toISOString()};localStorage.setItem(SK,JSON.stringify(s));ps(t,j,p,c,d)}
+function gt(t,j,p,c){return ld()[t+"|"+j+"|"+p+"|"+c]||null}
+
+// ═══════════════════════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════════════════════
+function sl(s){return s<=2.0?"Unacceptable":s<=3.0?"Acceptable":s<=4.0?"Very Good":"Outstanding"}
+function sc(s){return s<=2.0?"#5c6a72":s<=3.0?"#A5ACAF":s<=4.0?"#003359":"#44D62C"}
+function ul(){return new Date()>=CFG.doUnlock}
+function cd(){var d=CFG.doUnlock-new Date();if(d<=0)return null;var dy=Math.floor(d/864e5),h=Math.floor(d%864e5/36e5),m=Math.floor(d%36e5/6e4);return dy>0?"Unlocks in "+dy+"d "+h+"h":h>0?"Unlocks in "+h+"h "+m+"m":"Unlocks in "+m+"m"}
+function at(s,a){return s<=2.0?a.l:s<=3.0?a.m:s<=4.0?a.g:a.h}
+function av(a){var s=0;for(var i=0;i<a.length;i++)s+=a[i];return s/a.length}
+function e(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML}
+function $(id){return document.getElementById(id)}
+function ap(){return $("app")}
+function cn(id){for(var i=0;i<CATS.length;i++)if(CATS[i].id===id)return CATS[i].n;return""}
+
+// ═══════════════════════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════════════════════
+function R(){$("signOutBtn").style.display=S.v!=="login"?"block":"none";switch(S.v){case"login":rL();break;case"al":rAL();break;case"admin":rA();break;case"dash":rD();break;case"score":rS();break}}
+
+function rL(){
+  var js=[];CATS.forEach(function(ct){(J[ct.id]||[]).forEach(function(jg,idx){js.push({j:jg,ci:ct.id,cn:ct.n,head:idx===0})})});
+  ap().innerHTML='<div class="login-hd"><div class="login-ey">SeDR '+CFG.year+'</div><div class="login-t">Competition<br>Scoring Tool</div><div class="login-s">The Dental College of Georgia<br>at Augusta University</div></div>'+
+    '<div class="card"><label class="label">Select your name to begin</label><select class="sel" id="js"><option value="">Select judge...</option>'+js.map(function(x){return'<option value="'+x.j+"|"+x.ci+'">'+e(x.j)+(x.head?" *":"")+' | '+e(x.cn)+"</option>"}).join("")+'</select>'+
+    '<div style="font-size:11px;color:#A5ACAF;margin-top:8px;padding:0 2px">* Head Judge</div>'+
+    '<button class="btn-primary" id="lb" disabled onclick="dL()">Start Judging</button></div>'+
+    '<div style="text-align:center;margin-top:24px"><button class="btn-link" onclick="sAL()">Admin access</button></div>'+
+    '<div class="login-ft">Video rubrics due: '+CFG.vDead+'<br>Day-of poster visits: '+CFG.doDate+'</div>'+
+    '<div style="text-align:center;padding:8px 16px 24px;font-size:9px;color:#c8cccf;letter-spacing:0.02em">Office of Digital Technologies</div>';
+  $("js").addEventListener("change",function(){$("lb").disabled=!this.value})
+}
+function dL(){var v=$("js").value;if(!v)return;var p=v.split("|");S.j=p[0];S.c=p[1];S.tab="video";S.v="dash";R()}
+function showLogin(){S={v:"login",j:"",c:"",tab:"video",st:null,sp:null,fs:[],fb:[],ff:"",fe:"",ac:null};R()}
+function sAL(){S.v="al";R()}
+function rAL(){
+  ap().innerHTML='<div class="card" style="margin-top:40px;text-align:center"><div class="title">Admin Access</div><input type="password" class="pwd" id="aci" placeholder="Code"><div id="ae" class="err hidden" style="margin-top:10px"></div><button class="btn-primary" onclick="dAL()">Access Dashboard</button><button class="btn-outline" style="margin-top:10px" onclick="showLogin()">Back</button></div>';
+  $("aci").addEventListener("keydown",function(ev){if(ev.key==="Enter")dAL()})
+}
+function dAL(){if($("aci").value===CFG.code){S.v="admin";R()}else{$("ae").classList.remove("hidden");$("ae").textContent="Incorrect code."}}
+
+// ── DASHBOARD ─────────────────────────────────────────────────────────
+function rD(){
+  var ps2=P[S.c]||[],tab=S.tab,lk=tab==="dayof"&&!ul();
+  function cd2(t){var n=0;for(var i=0;i<ps2.length;i++)if(gt(t,S.j,ps2[i],S.c))n++;return n}
+  var vD=cd2("video"),dD=cd2("dayof"),tot=ps2.length,vP=Math.round(vD/tot*100),dP=Math.round(dD/tot*100);
+  var rows="";
+  if(lk){
+    rows='<div class="card" style="text-align:center;padding:34px 20px">'+I.lockLg+
+      '<div style="font-family:Montserrat,sans-serif;font-size:17px;font-weight:700;color:#003359;margin-top:18px;margin-bottom:8px">Day-of Rubric Locked</div>'+
+      '<div style="font-size:14px;color:#5c6a72;line-height:1.5;margin-bottom:12px">This rubric will become available on<br><strong style="color:#003359">April 17, 2026 at 11:00 AM EST</strong></div>'+
+      '<div style="font-size:13px;color:#A5ACAF;font-weight:600">'+(cd()||"")+'</div></div>';
+  } else {
+    if(tab==="video"){
+      rows+='<div class="instr"><strong>Step 1:</strong> Watch each presentation using the play button. <strong>Step 2:</strong> Tap the presenter name to open the scoring form.</div>';
+    } else {
+      rows+='<div class="instr"><strong>Instructions:</strong> Visit each poster. After your conversation with the presenter, tap their name below to score.</div>';
+    }
+    for(var i=0;i<ps2.length;i++){
+      var p=ps2[i],d=gt(tab,S.j,p,S.c),a=d?av(d.scores).toFixed(2):null,bc=d?sc(parseFloat(a)):"#e4e6e7",vu=vidUrl(S.c,p);
+      rows+='<div class="p-row" style="border-left-color:'+bc+'" onclick="oS(\''+tab+"','"+e(p)+"')\">"+ '<div class="p-num">'+(i+1)+'</div>'+
+        '<div style="flex:1;min-width:0"><div class="p-name">'+e(p)+'</div>'+(d?'<div class="p-avg">'+a+' | '+sl(parseFloat(a))+'</div>':'')+'</div>'+
+        '<div class="p-right">'+(tab==="video"&&vu?'<button class="btn-watch-sm" onclick="event.stopPropagation();window.open(\''+vu+"','_blank')\">"+I.play+' Watch</button>':'')+
+        '<span class="badge '+(d?"badge-done":"badge-wait")+'">'+(d?I.chk+' Done':'Pending')+'</span></div></div>';
+    }
+  }
+  ap().innerHTML='<div class="card"><div style="font-size:12px;color:#7a8184;margin-bottom:2px;text-transform:uppercase;letter-spacing:0.08em;font-weight:600">Judging as</div>'+
+    '<div style="font-family:Montserrat,sans-serif;font-size:19px;font-weight:700;color:#003359;margin-bottom:3px">'+e(S.j)+'</div>'+
+    '<div style="font-size:14px;color:#5c6a72">'+e(cn(S.c))+'</div>'+
+    '<div style="display:flex;gap:16px;margin-top:18px">'+
+      '<div style="flex:1"><div style="font-size:12px;color:#7a8184;margin-bottom:4px">Video Rubric: '+vD+' of '+tot+'</div><div class="prog"><div class="prog-fill '+(vP===100?"full":"")+'" style="width:'+vP+'%"></div></div></div>'+
+      '<div style="flex:1"><div style="font-size:12px;color:#7a8184;margin-bottom:4px">Day-of Rubric: '+dD+' of '+tot+'</div><div class="prog"><div class="prog-fill '+(dP===100?"full":"")+'" style="width:'+dP+'%"></div></div></div>'+
+    '</div></div>'+
+    '<div class="tabs"><button class="tab '+(tab==="video"?"on":"")+'" onclick="sT(\'video\')">'+I.vid+' Video Rubric</button>'+
+    '<button class="tab '+(tab==="dayof"?"on":"")+" "+(!ul()?"off":"")+'" onclick="sT(\'dayof\')">Day-of Rubric '+(!ul()?I.lock:"")+'</button></div>'+rows
+}
+function sT(t){S.tab=t;R()}
+function oS(t,p){if(t==="dayof"&&!ul())return;var cr=t==="video"?VC:DC,ex=gt(t,S.j,p,S.c);S.v="score";S.st=t;S.sp=p;S.fs=ex?ex.scores.slice():cr.map(function(){return null});S.fb=S.fs.map(function(s){if(s===null)return null;for(var b=0;b<BND.length;b++)if(BND[b].sc.indexOf(s)!==-1)return b;return null});S.ff=ex?ex.feedback:"";S.fe="";R()}
+
+// ── SCORING FORM ──────────────────────────────────────────────────────
+function rS(){
+  var t=S.st,p=S.sp,cr=t==="video"?VC:DC;
+  var done=true;for(var i=0;i<S.fs.length;i++)if(S.fs[i]===null){done=false;break}
+  var a=done?av(S.fs):null;
+  var scored=0;for(var i=0;i<S.fs.length;i++)if(S.fs[i]!==null)scored++;
+
+  // Video button
+  var vu=vidUrl(S.c,p);
+  var vidBtn="";
+  if(t==="video"&&vu){vidBtn='<button class="btn-watch" onclick="window.open(\''+vu+"','_blank')\">"+I.vid+' Watch Presentation</button>'}
+
+  // Criteria
+  var ch="";
+  for(var i=0;i<cr.length;i++){
+    var c=cr[i],sel=S.fs[i],abi=S.fb[i],bb="";
+    for(var b=0;b<BND.length;b++){var bn=BND[b],ia=abi===b,hs=sel!==null&&bn.sc.indexOf(sel)!==-1,bs="";
+      if(ia||hs){bs=bn.cl==="#44D62C"?"background:"+bn.cl+";color:#003359;border-color:"+bn.cl+";font-weight:800":"background:"+bn.cl+";color:#fff;border-color:"+bn.cl}
+      bb+='<button class="band" style="'+bs+'" onclick="sB('+i+","+b+')">'+bn.lb+'<span class="band-range">'+bn.sc[0].toFixed(2)+" - "+bn.sc[bn.sc.length-1].toFixed(2)+"</span></button>"}
+    var bandHint=abi===null?'<div class="band-instr">Tap a level above to begin scoring</div>':"";
+    var su="";
+    if(abi!==null&&abi>=0){var ab=BND[abi],sbs="";
+      var hintKey=["l","m","g","h"][abi];
+      var hintText=c.a[hintKey]||"";
+      for(var k=0;k<ab.sc.length;k++){var v=ab.sc[k],is2=sel===v,ss="";
+        if(is2){ss=ab.cl==="#44D62C"?"background:"+ab.cl+";color:#003359;border-color:"+ab.cl:"background:"+ab.cl+";color:#fff;border-color:"+ab.cl}
+        sbs+='<button class="sub-btn" style="'+ss+'" onclick="sC('+i+","+v+')">'+v.toFixed(2)+"</button>"}
+      su='<div class="sub-area"><div class="sub-grid" style="margin-bottom:10px">'+sbs+'</div>'+
+        '<div style="font-size:11px;color:#A5ACAF;line-height:1.45;padding:0 2px">'+e(hintText)+'</div></div>'}
+    ch+='<div class="crit-card"><div class="crit-step">Criterion '+(i+1)+' of '+cr.length+(sel!==null?' | <span style="color:'+sc(sel)+'">'+sel.toFixed(2)+' '+sl(sel)+'</span>':'')+'</div>'+
+      '<div class="crit-name">'+e(c.n)+'</div>'+
+      '<div class="crit-q-label">Consider</div>'+
+      '<div class="crit-q">'+e(c.p)+'</div>'+
+      '<div class="bands">'+bb+'</div>'+bandHint+su+'</div>';
+  }
+
+  var sm="";if(a!==null){sm='<div class="summary"><div class="summary-label">'+(t==="video"?"Video Presentation":"Poster Visit")+' Average</div><div class="summary-num">'+a.toFixed(2)+'</div><div class="summary-desc">'+sl(a)+'</div></div>'}
+  var er=S.fe?'<div class="err">'+e(S.fe)+'</div>':"";
+  var progPct=Math.round(scored/cr.length*100);
+
+  ap().innerHTML='<button class="btn-back" onclick="bD()">'+I.back+' Back to presenters</button>'+
+    '<div class="card"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px">'+
+      '<div class="title" style="margin-bottom:4px">'+(t==="video"?"Video Presentation":"Poster Visit")+'</div>'+
+      '<span class="badge '+(t==="video"?"badge-v":"badge-d")+'">'+(t==="video"?"60%":"40%")+' weight</span></div>'+
+      '<div style="font-size:18px;font-weight:700;color:#1a2a36;margin-bottom:3px">'+e(p)+'</div>'+
+      '<div style="font-size:13px;color:#7a8184;margin-bottom:2px">'+e(cn(S.c))+'</div>'+
+      '<div style="font-size:12px;color:#A5ACAF;margin-top:10px">Progress: '+scored+' of '+cr.length+' criteria scored</div>'+
+      '<div class="prog" style="margin-top:4px"><div class="prog-fill '+(progPct===100?"full":"")+'" style="width:'+progPct+'%"></div></div>'+
+      vidBtn+'</div>'+
+    ch+
+    '<div class="card"><label class="label">Written Feedback</label>'+
+      '<div class="hint">Provide constructive, positive feedback. All comments will be de-identified before being shared with the presenter.</div>'+
+      '<textarea class="txa" id="fbox" placeholder="Your feedback here...">'+e(S.ff)+'</textarea></div>'+
+    sm+er+
+    '<button class="btn-primary" onclick="sub()" style="margin-bottom:40px">Submit Scores</button>';
+  $("fbox").addEventListener("input",function(){S.ff=this.value;S.fe=""})
+}
+function sB(ci,bi){S.fb[ci]=bi;S.fe="";R()}
+function sC(ci,v){S.fs[ci]=v;for(var b=0;b<BND.length;b++)if(BND[b].sc.indexOf(v)!==-1){S.fb[ci]=b;break}S.fe="";R()}
+function sub(){for(var i=0;i<S.fs.length;i++){if(S.fs[i]===null){S.fe="Please score all "+S.fs.length+" criteria before submitting.";R();return}}if(!S.ff.trim()){S.fe="Please provide written feedback to the presenter.";R();return}sv(S.st,S.j,S.sp,S.c,{scores:S.fs,feedback:S.ff});$("successName").textContent=S.sp;$("successOverlay").classList.remove("hidden")}
+function dismissSuccess(){$("successOverlay").classList.add("hidden");S.v="dash";R()}
+function bD(){S.v="dash";R()}
+
+// ── ADMIN ─────────────────────────────────────────────────────────────
+function rA(){
+  var all=ld(),sel=S.ac||CATS[0].id,ps2=P[sel]||[],js=J[sel]||[],te=js.length*ps2.length,vs=0,ds=0;
+  js.forEach(function(j){ps2.forEach(function(p){if(all["video|"+j+"|"+p+"|"+sel])vs++;if(all["dayof|"+j+"|"+p+"|"+sel])ds++})});
+  var rk=ps2.map(function(p){var v2=[],d2=[];js.forEach(function(j){var x=all["video|"+j+"|"+p+"|"+sel];if(x)v2.push(av(x.scores));var y=all["dayof|"+j+"|"+p+"|"+sel];if(y)d2.push(av(y.scores))});var va=v2.length?av(v2):null,da=d2.length?av(d2):null,f=null;if(va!==null&&da!==null)f=va*.6+da*.4;else if(va!==null)f=va;return{n:p,va:va,da:da,f:f,vc:v2.length,dc:d2.length,tj:js.length}}).sort(function(a,b){return(b.f||0)-(a.f||0)});
+  var co=CATS.map(function(c){return'<option value="'+c.id+'"'+(c.id===sel?" selected":"")+">"+e(c.n)+"</option>"}).join("");
+  var rw=rk.map(function(r,i){var cl=i===0?"rk1":i===1?"rk2":i===2?"rk3":"";return'<div class="rank-row '+cl+'"><div class="rk-n">'+(i+1)+'</div><div class="rk-info"><div class="rk-name">'+e(r.n)+'</div><div class="rk-det">V: '+(r.va!==null?r.va.toFixed(2):"---")+' ('+r.vc+'/'+r.tj+') | D: '+(r.da!==null?r.da.toFixed(2):"---")+' ('+r.dc+'/'+r.tj+')</div></div><div class="rk-sc">'+(r.f!==null?r.f.toFixed(2):"---")+'</div></div>'}).join("");
+  var jw=js.map(function(j){var vd=0,dd=0;ps2.forEach(function(p){if(all["video|"+j+"|"+p+"|"+sel])vd++;if(all["dayof|"+j+"|"+p+"|"+sel])dd++});return'<div class="j-row"><span style="font-size:14px;font-weight:600">'+e(j)+'</span><div><span style="font-size:13px;font-weight:600;color:'+(vd===ps2.length?"#44D62C":"#A5ACAF")+'">V: '+vd+'/'+ps2.length+'</span> | <span style="font-size:13px;font-weight:600;color:'+(dd===ps2.length?"#44D62C":"#A5ACAF")+'">D: '+dd+'/'+ps2.length+'</span></div></div>'}).join("");
+  ap().innerHTML='<button class="btn-back" onclick="showLogin()">'+I.back+' Back to login</button><div class="title" style="font-size:22px">Admin Dashboard</div>'+
+    '<div style="margin-bottom:16px"><select class="sel" id="acs" onchange="cAC(this.value)">'+co+'</select></div>'+
+    '<div class="stats"><div class="card stat"><div style="font-size:12px;color:#7a8184">Video Forms</div><div class="stat-n '+(vs===te?"ok":"")+'">'+vs+'/'+te+'</div></div><div class="card stat"><div style="font-size:12px;color:#7a8184">Day-of Forms</div><div class="stat-n '+(ds===te?"ok":"")+'">'+ds+'/'+te+'</div></div><div class="card stat"><div style="font-size:12px;color:#7a8184">Judges</div><div class="stat-n">'+js.length+'</div></div></div>'+
+    '<div class="title" style="font-size:16px">Rankings</div><div style="font-size:12px;color:#7a8184;margin-top:-10px;margin-bottom:14px">Final = (Video x 0.60) + (Day-of x 0.40)</div>'+rw+
+    '<div class="card" style="margin-top:20px"><div class="title" style="font-size:14px">Judge Completion</div>'+jw+'</div>'+
+    '<button class="btn-reset" onclick="rAS()">Reset Local Scores</button><div style="height:40px"></div>'
+}
+function cAC(v){S.ac=v;R()}
+function rAS(){if(confirm("This will clear all LOCAL scores in this browser.\n\nTo also clear the Google Sheet, open the spreadsheet and delete all data rows in the Scores tab.\n\nProceed?")){localStorage.removeItem(SK);window.location.reload()}}
+R();
+</script>
+</body>
+</html>
