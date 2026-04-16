@@ -159,7 +159,7 @@
   .p-row:active { background:#eef2f6; }
   .p-num {
     font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700;
-    color:#A5ACAF; width:22px; text-align:center; flex-shrink:0; margin-right:12px;
+    color:#A5ACAF; min-width:28px; text-align:center; flex-shrink:0; margin-right:12px;
   }
   .p-name { font-size:15px; font-weight:600; color:#1a2a36; }
   .p-avg { font-size:12px; color:#7a8184; margin-top:2px; }
@@ -394,6 +394,17 @@ var VID={
 };
 function vidUrl(c,n){return VID[c+"|"+n]||""}
 
+// Poster numbers from competitor demographics
+var PN={
+"Hung, Theodore":63,"Mejia, Diana":61,"Suram, Joshita":66,"Tang, Sophia":60,
+"Crosby, Bryce":51,"Dirirsa, Hanan":54,"Paladines, Nathalie":56,"Tang, Jocelyn":29,
+"Dukes, Zuri":49,"El-Awik, Gabriel":23,"Josey, Morgan":45,"Mallishery, Shivani":39,
+"Quartararo, Kristen":46,"Ramirez, Gregory":21,"Sabanik, Pouya":43,"Smith, Dustin":24,
+"Comisi, John":80,"McCoy, Laurin":64,"Smidtas, Lukas":74,"Vyas, Yesha":30,
+"Corino, Brad":7,"Galliani, Justin":19,"Price, Hannah":15,"Woo, Sung":22,
+"Killedar, Daniya":28,"Loveless, Reid":31,"Parviainen, Anna":77,"Quintero, Steven":85
+};
+
 // ═══════════════════════════════════════════════════════════════════════
 // RUBRICS
 // ═══════════════════════════════════════════════════════════════════════
@@ -458,8 +469,8 @@ function rL(){
     '<div style="text-align:center;padding:8px 16px 24px;font-size:9px;color:#c8cccf;letter-spacing:0.02em">Office of Digital Technologies</div>';
   $("js").addEventListener("change",function(){$("lb").disabled=!this.value})
 }
-function dL(){var v=$("js").value;if(!v)return;var p=v.split("|");S.j=p[0];S.c=p[1];S.tab="video";S.v="dash";R()}
-function showLogin(){S={v:"login",j:"",c:"",tab:"video",st:null,sp:null,fs:[],fb:[],ff:"",fe:"",ac:null};R()}
+function dL(){var v=$("js").value;if(!v)return;var p=v.split("|");S.j=p[0];S.c=p[1];S.tab="dayof";S.v="dash";R()}
+function showLogin(){S={v:"login",j:"",c:"",tab:"dayof",st:null,sp:null,fs:[],fb:[],ff:"",fe:"",ac:null};R()}
 function sAL(){S.v="al";R()}
 function rAL(){
   ap().innerHTML='<div class="card" style="margin-top:40px;text-align:center"><div class="title">Admin Access</div><input type="password" class="pwd" id="aci" placeholder="Code"><div id="ae" class="err hidden" style="margin-top:10px"></div><button class="btn-primary" onclick="dAL()">Access Dashboard</button><button class="btn-outline" style="margin-top:10px" onclick="showLogin()">Back</button></div>';
@@ -476,7 +487,7 @@ function rD(){
   if(lk){
     rows='<div class="card" style="text-align:center;padding:34px 20px">'+I.lockLg+
       '<div style="font-family:Montserrat,sans-serif;font-size:17px;font-weight:700;color:#003359;margin-top:18px;margin-bottom:8px">Day-of Rubric Locked</div>'+
-      '<div style="font-size:14px;color:#5c6a72;line-height:1.5;margin-bottom:12px">This rubric will become available on<br><strong style="color:#003359">April 17, 2026 at 11:00 AM EST</strong></div>'+
+      '<div style="font-size:14px;color:#5c6a72;line-height:1.5;margin-bottom:12px">This rubric will become available on<br><strong style="color:#003359">April 17, 2026 at 11:00 AM EDT</strong></div>'+
       '<div style="font-size:13px;color:#A5ACAF;font-weight:600">'+(cd()||"")+'</div></div>';
   } else {
     if(tab==="video"){
@@ -486,7 +497,8 @@ function rD(){
     }
     for(var i=0;i<ps2.length;i++){
       var p=ps2[i],d=gt(tab,S.j,p,S.c),a=d?av(d.scores).toFixed(2):null,bc=d?sc(parseFloat(a)):"#e4e6e7",vu=vidUrl(S.c,p);
-      rows+='<div class="p-row" style="border-left-color:'+bc+'" onclick="oS(\''+tab+"','"+e(p)+"')\">"+ '<div class="p-num">'+(i+1)+'</div>'+
+      var pnum=tab==="dayof"&&PN[p]?"#"+PN[p]:(i+1);
+      rows+='<div class="p-row" style="border-left-color:'+bc+'" onclick="oS(\''+tab+"','"+e(p)+"')\">"+ '<div class="p-num">'+pnum+'</div>'+
         '<div style="flex:1;min-width:0"><div class="p-name">'+e(p)+'</div>'+(d?'<div class="p-avg">'+a+' | '+sl(parseFloat(a))+'</div>':'')+'</div>'+
         '<div class="p-right">'+(tab==="video"&&vu?'<button class="btn-watch-sm" onclick="event.stopPropagation();window.open(\''+vu+"','_blank')\">"+I.play+' Watch</button>':'')+
         '<span class="badge '+(d?"badge-done":"badge-wait")+'">'+(d?I.chk+' Done':'Pending')+'</span></div></div>';
